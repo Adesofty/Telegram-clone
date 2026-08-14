@@ -95,6 +95,24 @@ button:hover { background: #0077b3; }
 .friend { color: green; }
 </style>
 </head>
+  <div class="header">
+  <span>←</span>
+  <img src="https://via.placeholder.com/40">
+  <div>
+    <b>IFE ❤️</b><br>
+    <small style="color:#7d8b99">last seen recently</small>
+  </div>
+</div>
+
+<div id="chat-box">
+  <div class="date">Today</div>
+</div>
+
+<div class="input-area">
+  <input id="msg" placeholder="Message">
+  <input type="file" id="fileInput" accept="audio/*,video/*,image/*" style="display:none">
+  <button onclick="sendMessage()">Send</button>
+</div>
 <body>
 <h2>Telegram Clone</h2>
 <div id="chat"></div>
@@ -138,30 +156,25 @@ function deleteChat() {
   }
 setInterval(load, 2000);
 load();
-     function sendMessage() {
+function sendMessage() {
   const msg = document.getElementById('msg').value;
   const file = document.getElementById('fileInput').files[0];
   const chatBox = document.getElementById('chat-box');
+  const time = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
 
+  if(msg) {
+    chatBox.innerHTML += `<div class="msg you">${msg}<span class="time">${time} ✓✓</span></div>`;
+  }
   if(file) {
     const url = URL.createObjectURL(file);
-    if(file.type.startsWith('video/')){
-      chatBox.innerHTML += `<video src="${url}" controls width="250"></video><br>`;
-    }
-    if(file.type.startsWith('audio/')){
-      chatBox.innerHTML += `<audio src="${url}" controls></audio><br>`;
-    }
     if(file.type.startsWith('image/')){
-      chatBox.innerHTML += `<img src="${url}" width="250"><br>`;
+      chatBox.innerHTML += `<div class="msg you"><img src="${url}" width="200" style="border-radius:10px"><span class="time">${time} ✓✓</span></div>`;
     }
-    document.getElementById('fileInput').value = "";
-  }
-  if(msg) {
-    chatBox.innerHTML += `<p><b>You:</b> ${msg}</p>`;
   }
   document.getElementById('msg').value = "";
+  document.getElementById('fileInput').value = "";
   chatBox.scrollTop = chatBox.scrollHeight;
-} 
+}
 </script>
 </body>
 </html>
