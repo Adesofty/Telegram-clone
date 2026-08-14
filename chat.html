@@ -15,7 +15,8 @@ input, button { padding: 10px; margin: 5px; }
 <h2>Telegram Clone</h2>
 <div id="chat"></div>
 <input id="msg" placeholder="Type message...">
-<button onclick="send()">Send</button>
+18 <button onclick="send()">Send</button>
+19 <button onclick="deleteChat()" style="background:red; color:white;">Delete Chat</button>
 
 <script>
 let myId = prompt("Enter YOUR ID:");
@@ -44,7 +45,13 @@ function send() {
   document.getElementById("msg").value = "";
   load();
 }
-
+function deleteChat() {
+  if(confirm("Are you sure you want to delete this chat?")) {
+    localStorage.removeItem(key);
+    load();
+    alert("Chat deleted!");
+  }
+  }
 setInterval(load, 2000);
 load();
 </script>
