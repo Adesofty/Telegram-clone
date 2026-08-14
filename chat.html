@@ -44,7 +44,9 @@ input {
   <link rel="manifest" href="manifest.json">
 body { font-family: Arial; background: #eef; padding: 20px; }
 #chat { background: white; padding: 10px; height: 400px; overflow-y: scroll; border: 1px solid #ccc; }
-input, button { padding: 10px; margin: 5px; }
+input, button { padding: 10px; margin: 5px; border-radius: 20px; border: none; }
+button { background: #0088cc; color: white; font-weight: bold; }
+button:hover { background: #0077b3; }
 .msg { margin: 5px 0; }
 .me { color: blue; }
 .friend { color: green; }
@@ -54,6 +56,7 @@ input, button { padding: 10px; margin: 5px; }
 <h2>Telegram Clone</h2>
 <div id="chat"></div>
 <input id="msg" placeholder="Type message...">
+<input type="file" id="fileInput" accept="audio/*,video/*,image/*">
 18 <button onclick="send()">Send</button>
 19 <button onclick="deleteChat()" style="background:red; color:white;">Delete Chat</button>
 
