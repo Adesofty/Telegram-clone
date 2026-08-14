@@ -13,3 +13,18 @@
     }
   ]
 }
+{
+  "name": "IFE Chat",
+  "short_name": "IFE",
+  "start_url": "chat.html",
+  "display": "standalone",
+  "background_color": "#0e1621",
+  "theme_color": "#17212b",
+  "icons": [
+    {
+      "src": "Screenshot_20250810-132542_1.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}
