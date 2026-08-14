@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Telegram Clone</title>
+<style>
+body { font-family: Arial; background: #eef; padding: 20px; }
+#chat { background: white; padding: 10px; height: 400px; overflow-y: scroll; border: 1px solid #ccc; }
+input, button { padding: 10px; margin: 5px; }
+.msg { margin: 5px 0; }
+.me { color: blue; }
+.friend { color: green; }
+</style>
+</head>
+<body>
+<h2>Telegram Clone</h2>
+<div id="chat"></div>
+<input id="msg" placeholder="Type message...">
+<button onclick="send()">Send</button>
+
+<script>
+let myId = prompt("Enter YOUR ID:");
+let friendId = prompt("Enter FRIEND ID:");
+let chat = document.getElementById("chat");
+let key = "chat_" + [myId, friendId].sort().join("_");
+
+function load() {
+  chat.innerHTML = "";
+  let msgs = JSON.parse(localStorage.getItem(key) || "[]");
+  msgs.forEach(m => {
+    let div = document.createElement("div");
+    div.className = "msg " + (m.from === myId ? "me" : "friend");
+    div.innerText = m.from + ": " + m.text;
+    chat.appendChild(div);
+  });
+  chat.scrollTop = chat.scrollHeight;
+}
+
+function send() {
+  let txt = document.getElementById("msg").value;
+  if(!txt) return;
+  let msgs = JSON.parse(localStorage.getItem(key) || "[]");
+  msgs.push({from: myId, text: txt, time: Date.now()});
+  localStorage.setItem(key, JSON.stringify(msgs));
+  document.getElementById("msg").value = "";
+  load();
+}
+
+setInterval(load, 2000);
+load();
+</script>
+</body>
+</html>
