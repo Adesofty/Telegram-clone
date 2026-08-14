@@ -57,6 +57,7 @@ button:hover { background: #0077b3; }
 <div id="chat"></div>
 <input id="msg" placeholder="Type message...">
 <input type="file" id="fileInput" accept="audio/*,video/*,image/*">
+<button onclick="sendMessage()">Send</button>
 18 <button onclick="send()">Send</button>
 19 <button onclick="deleteChat()" style="background:red; color:white;">Delete Chat</button>
 
@@ -96,6 +97,30 @@ function deleteChat() {
   }
 setInterval(load, 2000);
 load();
+     function sendMessage() {
+  const msg = document.getElementById('msg').value;
+  const file = document.getElementById('fileInput').files[0];
+  const chatBox = document.getElementById('chat-box');
+
+  if(file) {
+    const url = URL.createObjectURL(file);
+    if(file.type.startsWith('video/')){
+      chatBox.innerHTML += `<video src="${url}" controls width="250"></video><br>`;
+    }
+    if(file.type.startsWith('audio/')){
+      chatBox.innerHTML += `<audio src="${url}" controls></audio><br>`;
+    }
+    if(file.type.startsWith('image/')){
+      chatBox.innerHTML += `<img src="${url}" width="250"><br>`;
+    }
+    document.getElementById('fileInput').value = "";
+  }
+  if(msg) {
+    chatBox.innerHTML += `<p><b>You:</b> ${msg}</p>`;
+  }
+  document.getElementById('msg').value = "";
+  chatBox.scrollTop = chatBox.scrollHeight;
+} 
 </script>
 </body>
 </html>
